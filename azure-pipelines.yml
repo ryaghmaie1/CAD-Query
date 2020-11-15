@@ -1,0 +1,83 @@
+trigger:
+  branches:
+    include:
+      - master
+      - refs/tags/*
+
+pr:
+- master
+
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: CadQuery/conda-packages
+      endpoint: CadQuery
+
+jobs:
+- template: conda-build.yml@templates
+  parameters:
+    name: Linux_36
+    vmImage: 'ubuntu-16.04'
+    py_maj: 3
+    py_min: 6
+
+- template: conda-build.yml@templates
+  parameters:
+    name: macOS_36
+    vmImage: 'macOS-10.15'
+    py_maj: 3
+    py_min: 6
+
+- template: conda-build.yml@templates
+  parameters:
+    name: Windows_36
+    vmImage: 'vs2017-win2016'
+    py_maj: 3
+    py_min: 6
+    conda_bld: 3.18
+- template: conda-build.yml@templates
+  parameters:
+    name: Linux_37
+    vmImage: 'ubuntu-16.04'
+    py_maj: 3
+    py_min: 7
+
+- template: conda-build.yml@templates
+  parameters:
+    name: macOS_37
+    vmImage: 'macOS-10.15'
+    py_maj: 3
+    py_min: 7
+
+- template: conda-build.yml@templates
+  parameters:
+    name: Windows_37
+    vmImage: 'vs2017-win2016'
+    py_maj: 3
+    py_min: 7
+    conda_bld: 3.18
+    
+- template: conda-build.yml@templates
+  parameters:
+    name: Linux_38
+    vmImage: 'ubuntu-16.04'
+    py_maj: 3
+    py_min: 8
+    conda_bld: 3.19.2
+
+- template: conda-build.yml@templates
+  parameters:
+    name: macOS_38
+    vmImage: 'macOS-10.15'
+    py_maj: 3
+    py_min: 8
+    conda_bld: 3.19.2
+
+- template: conda-build.yml@templates
+  parameters:
+    name: Windows_38
+    vmImage: 'vs2017-win2016'
+    py_maj: 3
+    py_min: 8
+    conda_bld: 3.19.2

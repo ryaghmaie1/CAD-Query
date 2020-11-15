@@ -1,0 +1,35 @@
+package:
+  name: cadquery
+  version:  {{ environ.get('PACKAGE_VERSION') }}
+
+source:
+  path: ..
+
+build:
+  string: {{ 'py'+environ.get('PYTHON_VERSION')}}
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  build:
+    - python {{ environ.get('PYTHON_VERSION') }}
+    - setuptools
+  run:
+    - python {{ environ.get('PYTHON_VERSION') }}
+    - ocp 7.4
+    - pyparsing 2.*
+    - ezdxf
+    - ipython
+    - typing_extensions
+    - nptyping
+    - scipy
+    
+test:
+  requires:
+    - pytest	
+  source_files:
+    - tests/
+  commands:
+    - pytest -v
+
+about:
+  summary: CadQuery - scripted CAD based on OCCT
